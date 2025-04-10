@@ -4,7 +4,8 @@ import math
 import pandas as pd
 import numpy as np
 try:
-    name = input("Enter your username (Please keep this consistent if you run this more than once as this will be used to create a label): ")
+    #You do not have to use your actual name, just use some identifier
+    name = input("Enter your username (Please keep this consistent if you run this more than once as this will be used to create a label.): ")
     numLoops= input("How many entries would you like to add (The more you do will make the model better): ")
     df = pd.DataFrame(
         columns=['dx1', 'dy1', 'dx2', 'dy2', 'dx3', 'dy3', 'dx4', 'dy4', 'dx5', 'dy5', 'dx6', 'dy6', 'dx7', 'dy7',
@@ -16,7 +17,7 @@ try:
         arr = []
 
         #give the user the chance to actually move the mouse
-        time.sleep(1)
+        time.sleep(.5)
         for i in range(10):
             x, y = pyautogui.position()
             changex,changey=x-prevx,y-prevy
@@ -36,7 +37,8 @@ try:
                 'dx9': arr[8][0], 'dy9': arr[8][1], 'dx10': arr[9][0], 'dy10': arr[9][1],
                 'Distance': totalDistanceTravelled, 'Username': name}
         temp_df = pd.DataFrame([data])
-        #Pandas sucks so much
+        #Pandas sucks so much to do this kind of thing
+        #This will output an error on the first loop but it is fine
         df = df._append(temp_df)
     df.to_csv('out.csv', index=False)
 except KeyboardInterrupt:
